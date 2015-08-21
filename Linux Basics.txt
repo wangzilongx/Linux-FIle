@@ -2842,7 +2842,7 @@ jerry: rw-
 
 setfacl
 	-m: 设定
-		u:UID:perm
+		u:UID:perm  (perm 权限格式 rwx)
 		g:GID:perm
 	-x：取消
 		u:UID
@@ -2851,8 +2851,10 @@ setfacl
 getfacl
 
 
+访问权限应用顺序  Owner -> facl user -> group -> facl group -> other 
+
 几个命令：
-w
+w 显示谁登录了并且显示他们正在做什么
 who
 每隔5秒钟，就来查看hadoop是否已经登录，如登录，显示其已经登录，并退出；
 sleep 
@@ -2870,9 +2872,11 @@ basename
 	$0: 执行脚本时的脚本路径及名称
 	
 mail
-
-hostname: 显示主机名
+     mail 使用方法：mail -s "Title" send_to_who(name) "Content"
+hostname: 显示主机名 (获取当前主机的主机名)
 如果当前主机的主机名不是www.magedu.com，就将其改为www.magedu.com
+if [ `hostname` != 'wwwmagedu.com' ] && hostname www.magedu.com
+
 
 如果当前主机的主机名是localhost，就将其改为www.magedu.com
 
@@ -3068,10 +3072,10 @@ fi
 
 
 终端类型：
-	console: 控制台
-	pty: 物理终端 (VGA)
-	tty#: 虚拟终端 (VGA)
-	ttyS#: 串行终端
+	console: 控制台(控制台不是终端)
+	pty: 物理终端 (VGA) physical terminal(一般不会有多个物理终端)
+	tty#: 虚拟终端 (VGA (显卡)）) 通常附加在某个物理终端，并结合软件实现的虚拟终端。
+	ttyS#: 串行终端 
 	pts/#: 伪终端
 	
 shell: 
@@ -3095,7 +3099,10 @@ du
 	-s 
 	-h
 	
-df: 
+df: 显示磁盘分区使用情况
+	-P ：不换行显示
+	-i：
+	-h:
 	
 链接
 
@@ -3153,8 +3160,9 @@ fdisk /dev/sda
 	t: 修改分区类型
 		L: 
 	l: 显示所支持的所有类型
-	
-partprobe	
+
+cat /proc/partitions  查看当前分区信息 
+partprobe	通知内核重新读取分区。
 
 
 
@@ -3226,15 +3234,12 @@ setfacl
 	
 
 	
+super block 包含所有信息：包含多少个块组，每个块组有多少个块，inode 信息，block 信息	
+	
+MBR 不属于任何分区，是一个扇区（sector）	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+EXT3 被称为日志文件系统 jfs （journal file system）	
 	
 	
 
